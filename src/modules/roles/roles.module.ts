@@ -9,5 +9,6 @@ import { UserModel } from '../users/users.model';
   providers: [RolesService],
   controllers: [RolesController],
   imports: [SequelizeModule.forFeature([RoleModel, UserModel])],
+  exports: [RolesService],
 })
 export class RolesModule {}
