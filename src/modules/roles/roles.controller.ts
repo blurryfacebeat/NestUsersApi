@@ -3,6 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { RoleModel } from './roles.model';
+import { ROLES } from './constants';
 
 @ApiTags('Roles table')
 @Controller('roles')
@@ -19,7 +20,7 @@ export class RolesController {
   @ApiOperation({ summary: 'Get role by value' })
   @ApiResponse({ status: 200, type: RoleModel })
   @Get(':value')
-  async getRoleByValue(@Param('value') value: string) {
+  async getRoleByValue(@Param('value') value: ROLES) {
     return this.rolesService.getRoleByValue(value);
   }
 

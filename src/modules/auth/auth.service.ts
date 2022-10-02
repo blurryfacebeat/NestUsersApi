@@ -9,6 +9,7 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UserModel } from '../users/users.model';
+import { AUTH_MESSAGES } from './constants/constants';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +29,7 @@ export class AuthService {
 
     if (candidate)
       throw new HttpException(
-        'User with this email already exists',
+        AUTH_MESSAGES.USER_EXISTS,
         HttpStatus.BAD_REQUEST,
       );
 
@@ -61,7 +62,7 @@ export class AuthService {
     }
 
     throw new UnauthorizedException({
-      message: 'No user with this email or password',
+      message: AUTH_MESSAGES.NO_USER,
     });
   }
 }
