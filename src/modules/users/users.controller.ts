@@ -8,6 +8,8 @@ import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { ROLES } from '../roles/constants';
 import { AddRoleDto } from '../roles/dto/add-role.dto';
 import { BanUserDto } from '../roles/dto/ban-user.dto';
+import { UsePipes } from '@nestjs/common';
+import { ValidationPipe } from '../../pipes/validation.pipe';
 
 @ApiTags('Users table')
 @Controller('users')
@@ -16,6 +18,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Create user' })
   @ApiResponse({ status: 201, type: UserModel })
+  @UsePipes(ValidationPipe)
   @Post()
   async createUser(@Body() dto: CreateUserDto) {
     return await this.usersService.createUser(dto);
