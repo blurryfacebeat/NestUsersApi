@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UsePipes } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { RoleModel } from './roles.model';
 import { ROLES } from './constants';
+import { ValidationPipe } from '../../pipes/validation.pipe';
 
 @ApiTags('Roles table')
 @Controller('roles')
@@ -12,6 +13,7 @@ export class RolesController {
 
   @ApiOperation({ summary: 'Create role' })
   @ApiResponse({ status: 201, type: RoleModel })
+  @UsePipes(ValidationPipe)
   @Post()
   async createRole(@Body() dto: CreateRoleDto) {
     return this.rolesService.createRole(dto);
