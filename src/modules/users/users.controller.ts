@@ -36,6 +36,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Issue a role' })
   @ApiResponse({ status: 200 })
   @Roles(ROLES.ADMIN)
+  @UsePipes(ValidationPipe)
   @UseGuards(RolesGuard)
   @Post('role')
   async addRole(@Body() dto: AddRoleDto) {
